@@ -1,4 +1,6 @@
+require 'open-uri'
 require 'cgi'
+require 'rss'
 
 def parse(page_source)
   dates = page_source.scan(
@@ -21,11 +23,11 @@ def format_text(title, url ,url_title_time_ary)
 end
 
 #puts parse(`wget -O- http://pecoegg.com/website-131.html`)
-puts parse(`wget -q -O- http://crawler.sbcr.jp/samplepage.html`)
+#puts parse(`wget -q -O- http://crawler.sbcr.jp/samplepage.html`)
 
 
-#puts format_text("WWW.SBCR.JP トピックス",
-#  "http://pecoegg.com/website-131.html",
-#  parse(`/usr/local/bin/wget -O-
-#    http://pecoegg.com/website-131.html`))
-
+puts format_text("WWW.SBCR.JP トピックス",
+  "http://crawler.sbcr.jp/samplepage.html",
+  parse(open(
+    "http://crawler.sbcr.jp/samplepage.html",
+    "r:UTF-8",&:read)))
