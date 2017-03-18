@@ -6,7 +6,7 @@ Anemone.crawl(
   anemone.focus_crawl do |page|
     page.links.keep_if { |link|
       #bestsellersを含むURLのみを表示
-      links.to_s.match(/¥/bestsellers/)
+      link.to_s.match(/\/bestsellers/)
     }
   end
   anemone.on_every_page do |page|
