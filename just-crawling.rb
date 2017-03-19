@@ -1,6 +1,5 @@
 require 'anemone'
-require 'nokogiri'
-require 'kconv' #日本語文字コード変換ライブラリ
+
 
 urls = [
   "http://www.amazon.co.jp/gp/bestsellers/books/",
@@ -17,7 +16,10 @@ urls = [
     end
 
     #取得したページに対する処理
-    anemone.on_every_page do |page|
+    PATERN =
+      %r[466298\/+|466282\/+|2291657051\/+|2291905051\/+]
+    anemone.on_pages_like(PATERN) do |page|
+    #anemone.on_every_page do |page|
       puts page.url
     end
   end
